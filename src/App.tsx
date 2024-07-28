@@ -10,7 +10,7 @@ import TopDesigners from './components/TopDesigners';
 import StatusPieChart from './components/StatusPieChart';
 import FinanceChart from './components/FinanceChart';
 
-import styled from '@emotion/styled';
+// import styled from '@emotion/styled';
 import styles from './styles.module.css';
 import extendedTheme from './styles/themes';
 
