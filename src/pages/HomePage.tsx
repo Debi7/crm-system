@@ -19,7 +19,7 @@ const HomePage: React.FC = () => {
 
   return (
     <Box>
-      <Heading as="h1" size="xl" mb="4">Главная страница</Heading>
+      <Heading as="h1" size="lg">Home</Heading>
       {status === 'loading' && <Text>Loading...</Text>}
       {status === 'succeeded' && (
         <>

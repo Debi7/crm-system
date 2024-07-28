@@ -1,8 +1,10 @@
-// src/components/FinanceChart.tsx
+// файл отвечает за рендеринг линейной диаграммы
 import React from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { Box, Heading } from '@chakra-ui/react';
 import { Issue } from '../features/issues/issuesSlice';
+
+import styles from '../styles.module.css'
 
 interface FinanceChartProps {
   issues: Issue[];
@@ -25,21 +27,23 @@ const FinanceChart: React.FC<FinanceChartProps> = ({ issues }) => {
   const data = [previousMonthData, currentMonthData];
 
   return (
-    <Box mb="8">
-      <Heading as="h2" size="lg" mb="4">Финансы</Heading>
-      <ResponsiveContainer width="100%" height={400}>
-        <BarChart data={data}>
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="month" />
-          <YAxis />
-          <Tooltip />
-          <Legend />
-          <Bar dataKey="profit" fill="#8884d8" name="Прибыль" />
-          <Bar dataKey="expenses" fill="#82ca9d" name="Расходы" />
-          <Bar dataKey="balance" fill="#ff7300" name="Баланс" />
-        </BarChart>
-      </ResponsiveContainer>
-    </Box>
+    <div className={styles.financeChart__wrapper}>
+      <Box mb="8">
+        <Heading as="h2" size="lg" mb="4">Финансы</Heading>
+        <ResponsiveContainer width="50%" height={300}>
+          <BarChart data={data}>
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="month" />
+            <YAxis />
+            <Tooltip />
+            <Legend />
+            <Bar dataKey="profit" fill="#8884d8" name="Прибыль" />
+            <Bar dataKey="expenses" fill="#82ca9d" name="Расходы" />
+            <Bar dataKey="balance" fill="#ff7300" name="Баланс" />
+          </BarChart>
+        </ResponsiveContainer>
+      </Box>
+    </div>
   );
 };
 

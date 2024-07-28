@@ -6,6 +6,7 @@ import { Box, Text, UnorderedList, ListItem, Heading } from '@chakra-ui/react';
 import FinanceChart from '../components/FinanceChart';
 import StatusPieChart from '../components/StatusPieChart';
 
+
 const IssuesPage: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
   const { issues, status, error } = useSelector<RootState, IssuesState>(
@@ -18,9 +19,15 @@ const IssuesPage: React.FC = () => {
     }
   }, [dispatch, status]);
 
+  useEffect(() => {
+    console.log("Issues:", issues);
+    console.log("Status:", status);
+    console.log("Error:", error);
+  }, [issues, status, error]);
+
   return (
     <Box>
-      <Heading as="h1" size="xl" mb="4">Issue Page</Heading>
+      <Heading as="h1" size="lg">Issue</Heading>
       {status === 'loading' && <Text>Loading issues...</Text>}
       {status === 'succeeded' && (
         <>

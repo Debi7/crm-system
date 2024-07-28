@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchDesigners, DesignersState } from '../features/designers/designersSlice';
 import { RootState, AppDispatch } from '../store';
-import { Box, Text, Image, Table, Thead, Tbody, Tr, Th, Td } from '@chakra-ui/react';
+import { Box, Heading, Text, Image, Table, Thead, Tbody, Tr, Th, Td } from '@chakra-ui/react';
 
 const DesignerPage: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -18,7 +18,7 @@ const DesignerPage: React.FC = () => {
 
   return (
     <Box>
-      <Text fontSize="xl" fontWeight="bold" mb="4">Designer Page</Text>
+      <Heading as="h1" size="lg">Designer</Heading>
       {status === 'loading' && <Text>Loading designers...</Text>}
       {status === 'succeeded' && (
         <Box overflowX="auto">
