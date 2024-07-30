@@ -1,7 +1,28 @@
 {
   "header": {
-    "toggleTheme": "Toggle Theme",
-    "languageSwitch": "Switch Language"
+    "toggleTheme": "Switch Theme",
+    "switchLanguage": "Switch Language"
   },
-  "welcome": "Welcome to the CRM system"
+  "current_week_number": "Current week number: {{weekNumber}}",
+  "welcome": "Welcome to the CRM system",
+  "nav": {
+    "home": "Home",
+    "issues": "Issues",
+    "designer": "Designer"
+  },
+  "home": {
+    "title": "Home",
+    "loading": "Loading...",
+    "error_loading_comments": "Error loading comments."
+  },
+  "designer": {
+    "title": "Designers",
+    "loading_designers": "Loading designers...",
+    "error_loading_designers": "Error loading designers: {{error}}"
+  },
+  "issues": {
+    "title": "Issue",
+    "loading_issues": "Loading issues...",
+    "error_loading_issues": "Error loading issues: {{error}}"
+  }
 }

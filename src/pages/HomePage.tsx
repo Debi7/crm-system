@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchComments } from '../features/comments/commentsSlice';
 import { RootState, AppDispatch } from '../store';
@@ -6,7 +7,10 @@ import LastComments from '../components/LastComments';
 import TopDesigners from '../components/TopDesigners';
 import { Box, Text, Heading } from '@chakra-ui/react';
 
+
 const HomePage: React.FC = () => {
+  const { t } = useTranslation();
+
   const dispatch = useDispatch<AppDispatch>();
   const comments = useSelector((state: RootState) => state.comments.comments);
   const status = useSelector((state: RootState) => state.comments.status);
@@ -19,15 +23,15 @@ const HomePage: React.FC = () => {
 
   return (
     <Box>
-      <Heading as="h1" size="lg">Home</Heading>
-      {status === 'loading' && <Text>Loading...</Text>}
+      <Heading as="h1" size="lg">{t('home.title')}</Heading>
+      {status === 'loading' && <Text>{t('home.loading')}</Text>}
       {status === 'succeeded' && (
         <>
           <LastComments comments={comments} />
           <TopDesigners />
         </>
       )}
-      {status === 'failed' && <Text>Error loading comments.</Text>}
+      {status === 'failed' && <Text>{t('home.error_loading_comments')}</Text>}
     </Box>
   );
 };

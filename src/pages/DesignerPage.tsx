@@ -1,10 +1,14 @@
 import React, { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchDesigners, DesignersState } from '../features/designers/designersSlice';
 import { RootState, AppDispatch } from '../store';
 import { Box, Heading, Text, Image, Table, Thead, Tbody, Tr, Th, Td } from '@chakra-ui/react';
 
+
 const DesignerPage: React.FC = () => {
+  const { t } = useTranslation();
+
   const dispatch = useDispatch<AppDispatch>();
   const { designers, status, error } = useSelector<RootState, DesignersState>(
     (state) => state.designers
@@ -18,18 +22,18 @@ const DesignerPage: React.FC = () => {
 
   return (
     <Box>
-      <Heading as="h1" size="lg">Designer</Heading>
-      {status === 'loading' && <Text>Loading designers...</Text>}
+      <Heading as="h1" size="lg">{t('designer.title')}</Heading>
+      {status === 'loading' && <Text>{t('designer.loading_designers')}</Text>}
       {status === 'succeeded' && (
         <Box overflowX="auto">
           <Table variant="striped" colorScheme="teal">
             <Thead>
               <Tr>
-                <Th>Avatar</Th>
-                <Th>Name</Th>
-                <Th>Email</Th>
-                <Th>Completed Tasks</Th>
-                <Th>Tasks In Progress</Th>
+                <Th>{t('avatar')}</Th>
+                <Th>{t('name')}</Th>
+                <Th>{t('email')}</Th>
+                <Th>{t('completed_tasks')}</Th>
+                <Th>{t('tasks_in_progress')}</Th>
               </Tr>
             </Thead>
             <Tbody>
@@ -46,7 +50,7 @@ const DesignerPage: React.FC = () => {
           </Table>
         </Box>
       )}
-      {status === 'failed' && <Text>Error loading designers: {error}</Text>}
+      {status === 'failed' && <Text>{t('designer.error_loading_designers', { error })}</Text>}
     </Box>
   );
 };

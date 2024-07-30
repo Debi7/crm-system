@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchIssues, IssuesState } from '../features/issues/issuesSlice';
 import { RootState, AppDispatch } from '../store';
@@ -8,6 +9,8 @@ import StatusPieChart from '../components/StatusPieChart';
 
 
 const IssuesPage: React.FC = () => {
+  const { t } = useTranslation();
+
   const dispatch = useDispatch<AppDispatch>();
   const { issues, status, error } = useSelector<RootState, IssuesState>(
     (state) => state.issues
@@ -27,8 +30,8 @@ const IssuesPage: React.FC = () => {
 
   return (
     <Box>
-      <Heading as="h1" size="lg">Issue</Heading>
-      {status === 'loading' && <Text>Loading issues...</Text>}
+      <Heading as="h1" size="lg">{t('issues.title')}</Heading>
+      {status === 'loading' && <Text>{t('issues.loading_issues')}</Text>}
       {status === 'succeeded' && (
         <>
           <FinanceChart issues={issues} />
@@ -47,7 +50,7 @@ const IssuesPage: React.FC = () => {
           </UnorderedList>
         </>
       )}
-      {status === 'failed' && <Text>Error loading issues: {error}</Text>}
+      {status === 'failed' && <Text>{t('issues.error_loading_issues', { error })}</Text>}
     </Box>
   );
 };

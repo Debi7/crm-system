@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { ChakraProvider } from '@chakra-ui/react';
-import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom'; // Изменено с Switch на Routes
-
+import { lightTheme, darkTheme } from './styles/themes';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Header from './components/Header';
 import HomePage from './pages/HomePage';
 import IssuePage from './pages/IssuesPage';
@@ -9,14 +9,11 @@ import DesignerPage from './pages/DesignerPage';
 import TopDesigners from './components/TopDesigners';
 import StatusPieChart from './components/StatusPieChart';
 import FinanceChart from './components/FinanceChart';
-
-// import styled from '@emotion/styled';
-import styles from './styles.module.css';
-import extendedTheme from './styles/themes';
+import Navigation from './components/Navigation';
 
 const App: React.FC = () => {
   const [locale, setLocale] = useState('RU');
-  const [theme, setTheme] = useState('light');
+  const [isDarkMode, setIsDarkMode] = useState(false);
   const [weekNumber, setWeekNumber] = useState(0);
 
   useEffect(() => {
@@ -32,22 +29,17 @@ const App: React.FC = () => {
   }, []);
 
   return (
-    <ChakraProvider theme={extendedTheme}>
-      <div className={`App ${theme}`}>
+    <ChakraProvider theme={isDarkMode ? darkTheme : lightTheme}>
+      <div className={`App ${isDarkMode}`}>
         <Header
           locale={locale}
           setLocale={setLocale}
-          theme={theme}
-          setTheme={setTheme}
+          isDarkMode={isDarkMode}
+          setIsDarkMode={setIsDarkMode}
           weekNumber={weekNumber}
         />
         <Router>
-          <nav className={styles.nav__wrapper}>
-            {/* Создание ссылок для навигации */}
-            <Link to="/" className={styles.nav__link}>Home</Link>
-            <Link to="/issues" className={styles.nav__link}>Issue</Link>
-            <Link to="/designer" className={styles.nav__link}>Designer</Link>
-          </nav>
+          <Navigation />
           <main>
             <Routes>
               <Route path="/" element={<HomePage />} />
