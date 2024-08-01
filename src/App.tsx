@@ -4,11 +4,10 @@ import { lightTheme, darkTheme } from './styles/themes';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Header from './components/Header';
 import HomePage from './pages/HomePage';
-import IssuePage from './pages/IssuesPage';
+import IssuesPage from './pages/IssuesPage';
 import DesignerPage from './pages/DesignerPage';
-import TopDesigners from './components/TopDesigners';
-import StatusPieChart from './components/StatusPieChart';
-import FinanceChart from './components/FinanceChart';
+// import StatusPieChart from './components/StatusPieChart';
+// import FinanceChart from './components/FinanceChart';
 import Navigation from './components/Navigation';
 
 const App: React.FC = () => {
@@ -43,12 +42,13 @@ const App: React.FC = () => {
           <main>
             <Routes>
               <Route path="/" element={<HomePage />} />
-              <Route path="/issues" element={<IssuePage />} />
               <Route path="/designer" element={<DesignerPage />} />
+              <Route path="/issues" element={<IssuesPage />} />
             </Routes>
-            <TopDesigners />
-            <StatusPieChart issues={[]} />
-            <FinanceChart issues={[]} />
+            {/* <>
+              <StatusPieChart issues={[]} />
+              <FinanceChart issues={[]} />
+            </> */}
           </main>
         </Router>
       </div>

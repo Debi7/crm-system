@@ -1,7 +1,10 @@
 import React, { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchDesigners, Designer, Task } from '../features/designers/designersSlice';
 import { RootState, AppDispatch } from '../store';
+import styles from '../styles.module.css';
+
 
 const calculateMedian = (times: number[]): number => {
   if (times.length === 0) return 0;
@@ -16,6 +19,8 @@ const calculateMedianTime = (tasks: Task[] = []): number => {
 };
 
 const TopDesigners: React.FC = () => {
+  const { t } = useTranslation();
+
   const dispatch = useDispatch<AppDispatch>();
   const designers = useSelector((state: RootState) => state.designers.designers); // Используем тип Designer здесь
   const status = useSelector((state: RootState) => state.designers.status);
@@ -35,11 +40,11 @@ const TopDesigners: React.FC = () => {
     .slice(0, 10);
 
   return (
-    <div>
-      <h2>Топ 10 дизайнеров</h2>
-      {status === 'loading' && <p>Loading designers...</p>}
-      {status === 'failed' && <p>Error loading designers.</p>}
-      {status === 'succeeded' && (
+    <>
+      <h2 className={styles.topDesigners__heading}>{t('topDesigners.title')}</h2>
+      <div className={styles.topDesigners__wrapper}>
+        {status === 'loading' && <p>Loading designers...</p>}
+        {/* {status === 'succeeded' && ( */}
         <ul>
           {sortedDesigners.map((designer: Designer) => (
             <li key={designer.id}>
@@ -51,8 +56,9 @@ const TopDesigners: React.FC = () => {
             </li>
           ))}
         </ul>
-      )}
-    </div>
+        {/* )} */}
+      </div>
+    </>
   );
 };
 

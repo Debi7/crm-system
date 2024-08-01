@@ -8,21 +8,39 @@
   "nav": {
     "home": "Home",
     "issues": "Issues",
-    "designer": "Designer"
+    "designer": "Designers"
   },
   "home": {
     "title": "Home",
     "loading": "Loading...",
-    "error_loading_comments": "Error loading comments."
+    "error_loading_comments": "Error loading comments"
   },
   "designer": {
     "title": "Designers",
     "loading_designers": "Loading designers...",
-    "error_loading_designers": "Error loading designers: {{error}}"
+    "error_loading_designers": "Error loading designers"
   },
   "issues": {
     "title": "Issue",
     "loading_issues": "Loading issues...",
-    "error_loading_issues": "Error loading issues: {{error}}"
+    "error_loading_issues": "Error loading issues",
+    "no_issues_available": "No available issues",
+    "status": "Status: {{status}}",
+    "assigned_to": "Assigned to: {{assignedTo}}",
+    "created_at": "Created at: {{createdAt}}",
+    "updated_at": "Updated at: {{updatedAt}}"
+  },
+  "lastComments": {
+    "title": "Last 10 comments"
+  },
+  "topDesigners": {
+    "title": "Top 10 designers"
+  },
+  "tableDesigners": {
+    "avatar": "avatar",
+    "name": "name",
+    "email": "email",
+    "completed_tasks": "completed tasks",
+    "tasks_in_progress": "tasks in progress"
   }
 }

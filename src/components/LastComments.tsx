@@ -1,4 +1,6 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
+import styles from '../styles.module.css';
 
 // Этот интерфейс используется в компоненте LastComments для отображения данных комментариев в пользовательском интерфейсе
 interface Comment {
@@ -16,21 +18,25 @@ interface LastCommentsProps {
 }
 
 const LastComments: React.FC<LastCommentsProps> = ({ comments }) => {
+  const { t } = useTranslation();
+
   const lastComments = comments.slice(-10);
 
   return (
-    <div>
-      <h2>Последние 10 комментариев</h2>
-      {lastComments.map((comment) => (
-        <div key={comment.id}>
-          <img src={comment.designerAvatar} alt="avatar" />
-          <span>{comment.userName}</span>
-          <span>{comment.relativeTime}</span>
-          <span>{comment.task}</span>
-          <span>{comment.message}</span>
-        </div>
-      ))}
-    </div>
+    <>
+      <h2 className={styles.lastComments__heading}>{t('lastComments.title')}</h2>
+      <div className={styles.lastComments__wrapper}>
+        {lastComments.map((comment) => (
+          <div key={comment.id}>
+            <img src={comment.designerAvatar} alt="avatar" />
+            <span>{comment.userName}</span>
+            <span>{comment.relativeTime}</span>
+            <span>{comment.task}</span>
+            <span>{comment.message}</span>
+          </div>
+        ))}
+      </div>
+    </>
   );
 };
 

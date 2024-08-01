@@ -5,7 +5,7 @@ const lightTheme = extendTheme({
     global: {
       body: {
         fontFamily: 'body',
-        backgroundColor: '#ffffff',
+        backgroundColor: '#f9f4f4',
         color: '#000000',
       },
     },
@@ -22,7 +22,7 @@ const darkTheme = extendTheme({
     global: {
       body: {
         fontFamily: 'body',
-        backgroundColor: '#000000',
+        backgroundColor: '#575454',
         color: '#ffffff',
       },
     },

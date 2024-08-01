@@ -2,10 +2,14 @@
 import React from 'react';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Pie } from 'react-chartjs-2';
-import { Box, Heading, Text } from '@chakra-ui/react';
+// import { Box, Heading, Text } from '@chakra-ui/react';
+import { Box, Text, UnorderedList, ListItem, Heading } from '@chakra-ui/react';
+import { useTranslation } from 'react-i18next';
+
+
 import { Issue } from '../features/issues/issuesSlice';
 
-import styles from '../styles.module.css'
+import styles from '../styles.module.css';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -14,6 +18,8 @@ interface StatusPieChartProps {
 }
 
 const StatusPieChart: React.FC<StatusPieChartProps> = ({ issues }) => {
+  const { t } = useTranslation();
+
   let data;
   if (issues.length === 0) {
     data = {
@@ -47,18 +53,12 @@ const StatusPieChart: React.FC<StatusPieChartProps> = ({ issues }) => {
   console.log("Rendering StatusPieChart with data:", data);
 
   return (
-    <div className={styles.statusPieChart__wrapper}>
-
-      <Box mb="8" className="chart__container">
-        <Heading as="h2" size="lg" mb="4">Статусы задач</Heading>
-        <Box width="100%" height="400px">
-          <Pie data={data} />
-        </Box>
-        {issues.length === 0 && <Text>No issues to display</Text>}
+    <Box className={styles.statusPieChart__wrapper}>
+      <Box width="100%" height="375px">
+        <Pie data={data} />
       </Box>
-
-    </div>
-
+      {issues.length === 0 && <Text>No issues to display</Text>}
+    </Box>
   );
 };
 

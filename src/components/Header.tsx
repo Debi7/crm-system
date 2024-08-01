@@ -8,10 +8,15 @@ import styles from '../styles.module.css';
 
 const StyledButton = styled(Button)`
   width: 50px;
-  background-color: brown;
+  background-color: #d2d1d1;
   border-radius: 5px;
   cursor: pointer;
-  color: white;
+  color: #00000;
+
+  &:hover {
+    background-color: #b0b0b0;
+    color: #ffffff;
+  }
 `;
 
 interface HeaderProps {

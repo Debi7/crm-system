@@ -9,8 +9,8 @@ const Navigation: React.FC = () => {
   return (
     <nav className={styles.nav__wrapper}>
       <Link to="/" className={styles.nav__link}>{t('nav.home')}</Link>
-      <Link to="/issues" className={styles.nav__link}>{t('nav.issues')}</Link>
       <Link to="/designer" className={styles.nav__link}>{t('nav.designer')}</Link>
+      <Link to="/issues" className={styles.nav__link}>{t('nav.issues')}</Link>
     </nav>
   );
 };
