@@ -1,7 +1,46 @@
 {
   "header": {
-    "toggleTheme": "Переключить тему",
-    "languageSwitch": "Сменить язык"
+    "toggleTheme": "Сменить тему",
+    "switchLanguage": "Сменить язык"
   },
-  "welcome": "Добро пожаловать в CRM систему"
+  "current_week_number": "Текущий номер рабочей недели: {{weekNumber}}",
+  "welcome": "Добро пожаловать в CRM систему",
+  "nav": {
+    "home": "Главная",
+    "issues": "Задачи",
+    "designer": "Дизайнеры"
+  },
+  "home": {
+    "title": "Главная",
+    "loading": "Загрузка...",
+    "error_loading_comments": "Ошибка загрузки комментариев"
+  },
+  "designer": {
+    "title": "Дизайнеры",
+    "loading_designers": "Загрузка дизайнеров...",
+    "error_loading_designers": "Ошибка загрузки дизайнеров"
+  },
+  "issues": {
+    "title": "Задача",
+    "loading_issues": "Загрузка задач...",
+    "error_loading_issues": "Ошибка загрузки задач",
+    "no_issues_available": "Нет доступных задач",
+    "status": "Статус: {{status}}",
+    "assigned_to": "Назначено на: {{assignedTo}}",
+    "created_at": "Создано: {{createdAt}}",
+    "updated_at": "Обновлено: {{updatedAt}}"
+  },
+  "lastComments": {
+    "title": "Последние 10 комментариев"
+  },
+  "topDesigners": {
+    "title": "Топ 10 дизайнеров"
+  },
+  "tableDesigners": {
+    "avatar": "фото",
+    "name": "имя",
+    "email": "эл.почта",
+    "completed_tasks": "выполненные задачи",
+    "tasks_in_progress": "задачи в стадии выполнения"
+  }
 }
