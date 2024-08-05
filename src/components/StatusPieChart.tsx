@@ -2,10 +2,7 @@
 import React from 'react';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Pie } from 'react-chartjs-2';
-// import { Box, Heading, Text } from '@chakra-ui/react';
-import { Box, Text, UnorderedList, ListItem, Heading } from '@chakra-ui/react';
-import { useTranslation } from 'react-i18next';
-
+import { Box, Text } from '@chakra-ui/react';
 
 import { Issue } from '../features/issues/issuesSlice';
 
@@ -18,8 +15,6 @@ interface StatusPieChartProps {
 }
 
 const StatusPieChart: React.FC<StatusPieChartProps> = ({ issues }) => {
-  const { t } = useTranslation();
-
   let data;
   if (issues.length === 0) {
     data = {

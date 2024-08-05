@@ -26,15 +26,17 @@ const LastComments: React.FC<LastCommentsProps> = ({ comments }) => {
     <>
       <h2 className={styles.lastComments__heading}>{t('lastComments.title')}</h2>
       <div className={styles.lastComments__wrapper}>
-        {lastComments.map((comment) => (
-          <div key={comment.id}>
-            <img src={comment.designerAvatar} alt="avatar" />
-            <span>{comment.userName}</span>
-            <span>{comment.relativeTime}</span>
-            <span>{comment.task}</span>
-            <span>{comment.message}</span>
-          </div>
-        ))}
+        <div className={styles.scrollableContainer}>
+          {lastComments.map((comment) => (
+            <div key={comment.id} className={styles.comment__wrapper}>
+              <img src={comment.designerAvatar} alt="avatar" />
+              <span>{comment.userName}</span>
+              <span>{comment.relativeTime}</span>
+              <span>{comment.task}</span>
+              <span>{comment.message}</span>
+            </div>
+          ))}
+        </div>
       </div>
     </>
   );

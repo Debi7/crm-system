@@ -1,59 +1,53 @@
 import React, { useEffect } from 'react';
-import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchDesigners, DesignersState } from '../features/designers/designersSlice';
 import { RootState, AppDispatch } from '../store';
-import { Box, Heading, Text, Image, Table, Thead, Tbody, Tr, Th, Td } from '@chakra-ui/react';
-import TopDesigners from '../components/TopDesigners';
+import { Box, Text, UnorderedList, ListItem, Heading } from '@chakra-ui/react';
 import styles from '../styles.module.css';
 
 
 const DesignerPage: React.FC = () => {
-  const { t } = useTranslation();
-
   const dispatch = useDispatch<AppDispatch>();
-  const { designers, status } = useSelector<RootState, DesignersState>(
+  const { designers, status, error } = useSelector<RootState, DesignersState>(
     (state) => state.designers
   );
 
   useEffect(() => {
     if (status === 'idle') {
-      dispatch(fetchDesigners({ status: 'New', key: 'your_project_key', ordering: '-email', page: 1, limit: 16 }));
+      dispatch(fetchDesigners({ key: 'your_project_key' }));
     }
   }, [dispatch, status]);
 
-  return (
-    <Box className={styles.designer__wrapper}>
-      <TopDesigners />
-      {status === 'loading' && <Text>{t('designer.loading_designers')}</Text>}
-      {/* {status === 'succeeded' && ( */}
-      <Box overflowX="auto">
+  useEffect(() => {
+    console.log("Designers:", designers);
+    console.log("Status:", status);
+    console.log("Error:", error);
+  }, [designers, status, error]);
 
-        <Table variant="striped" colorScheme="teal" className={styles.tableDesigner__wrapper}>
-          <Thead>
-            <Tr>
-              <Th>{t('tableDesigners.avatar')}</Th>
-              <Th>{t('tableDesigners.name')}</Th>
-              <Th>{t('tableDesigners.email')}</Th>
-              <Th>{t('tableDesigners.completed_tasks')}</Th>
-              <Th>{t('tableDesigners.tasks_in_progress')}</Th>
-            </Tr>
-          </Thead>
-          <Tbody>
-            {designers.map((designer) => (
-              <Tr key={designer.id}>
-                <Td><Image src={designer.avatar} alt="avatar" boxSize="50px" borderRadius="full" /></Td>
-                <Td>{designer.name}</Td>
-                <Td>{designer.email}</Td>
-                <Td>{designer.tasksCompleted}</Td>
-                <Td>{designer.tasksInProgress}</Td>
-              </Tr>
-            ))}
-          </Tbody>
-        </Table>
-      </Box>
-      {/* )} */}
-      {status === 'failed' && <Text>{t('designer.error_loading_designers')}</Text>}
+  return (
+    <Box className={styles.designerPage__wrapper}>
+      {status === 'loading' && <Text>Loading...</Text>}
+      {status === 'failed' && <Text>Error: {error}</Text>}
+      {status === 'succeeded' && designers.length > 0 ? (
+        <UnorderedList>
+          {designers.map((designer) => (
+            <ListItem key={designer.username}>
+              <Heading as="h3">{designer.username}</Heading>
+              <Text>Email: {designer.email}</Text>
+              <Text>Avatar: <img src={designer.avatar} alt={designer.username} /></Text>
+              <UnorderedList>
+                {designer.issues.map(issue => (
+                  <ListItem key={issue.id}>
+                    <Text>Issue Key: {issue.key}, Status: {issue.status}</Text>
+                  </ListItem>
+                ))}
+              </UnorderedList>
+            </ListItem>
+          ))}
+        </UnorderedList>
+      ) : (
+        <Text>No designers available.</Text>
+      )}
     </Box>
   );
 };

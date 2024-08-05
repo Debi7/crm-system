@@ -4,7 +4,7 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Responsive
 import { Box, Heading } from '@chakra-ui/react';
 import { Issue } from '../features/issues/issuesSlice';
 
-import styles from '../styles.module.css'
+import styles from '../styles.module.css';
 
 interface FinanceChartProps {
   issues: Issue[];
@@ -12,10 +12,10 @@ interface FinanceChartProps {
 
 const FinanceChart: React.FC<FinanceChartProps> = ({ issues }) => {
   const getMonthlyData = (issues: Issue[], month: number) => {
-    return issues.filter(issue => new Date(issue.updatedAt).getMonth() === month)
+    return issues.filter(issue => new Date(issue.date_updated).getMonth() === month)
       .reduce((acc, issue) => {
         acc.profit += issue.received_from_client || 0;
-        acc.expenses += issue.send_to_project_manage || 0;
+        acc.expenses += issue.send_to_project_manager || 0;
         acc.balance = acc.profit - acc.expenses;
         return acc;
       }, { month: month + 1, profit: 0, expenses: 0, balance: 0 });
@@ -31,7 +31,6 @@ const FinanceChart: React.FC<FinanceChartProps> = ({ issues }) => {
       <Heading as="h2" size="md" mb="4">Финансы</Heading>
 
       <div className={styles.financeChart__wrapper}>
-
         <Box mb="8">
           <ResponsiveContainer height={355}>
             <BarChart data={data}>

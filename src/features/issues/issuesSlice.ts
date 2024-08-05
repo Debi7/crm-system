@@ -4,14 +4,21 @@ import axios from 'axios';
 
 export interface Issue {
   id: number;
-  title: string;
-  description: string;
+  key: string;
   status: 'New' | 'In Progress' | 'Done';
-  assignedTo: number;
-  createdAt: string;
-  updatedAt: string;
-  received_from_client: number; // сумма прибыли от клиента
-  send_to_project_manage: number; // сумма расходов на управление проектом
+  designer: string | null;
+  project: string;
+  date_created: string;
+  summary: string;
+  received_from_client: number;
+  send_to_project_manager: number;
+  send_to_account_manager: number;
+  send_to_designer: number;
+  date_updated: string;
+  date_started_by_designer: string | null;
+  // date_started_by_designer: string;
+  date_finished_by_designer: string | null;
+  date_finished: string | null;
 }
 
 export interface IssuesState {
@@ -38,9 +45,14 @@ export const fetchIssues = createAsyncThunk<
     const response = await axios.get(API_ENDPOINTS.issues, {
       params: { status, key },
     });
+
+    console.log('API Response:', response.data);
+
     return response.data;
   } catch (error) {
-    return thunkAPI.rejectWithValue('Failed to fetch issues');
+    return thunkAPI.rejectWithValue(
+      error instanceof Error ? error.message : 'Failed to fetch comments'
+    );
   }
 });
 

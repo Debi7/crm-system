@@ -1,14 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { API_ENDPOINTS } from '../../apiConfig';
-import axios from 'axios';
-
-interface Project {
-  id: number;
-  name: string;
-  description: string;
-  createdAt: string;
-  updatedAt: string;
-}
+import { fetchProjectsFromAPI } from '../../services/api';
+import { Project } from '../types';
 
 export interface ProjectsState {
   projects: Project[];
@@ -28,11 +20,12 @@ export const fetchProjects = createAsyncThunk<
   { rejectValue: string }
 >('projects/fetchProjects', async (_, thunkAPI) => {
   try {
-    const response = await axios.get(API_ENDPOINTS.projects);
-    console.log('API response:', response.data);
-    return response.data;
+    const projects = await fetchProjectsFromAPI();
+    return projects;
   } catch (error) {
-    return thunkAPI.rejectWithValue('Failed to fetch projects');
+    return thunkAPI.rejectWithValue(
+      error instanceof Error ? error.message : 'Failed to fetch comments'
+    );
   }
 });
 

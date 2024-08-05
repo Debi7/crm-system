@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchComments } from '../features/comments/commentsSlice';
 import { RootState, AppDispatch } from '../store';
 import LastComments from '../components/LastComments';
-import { Box, Text, Heading } from '@chakra-ui/react';
+import { Box, Text } from '@chakra-ui/react';
 
 import styles from '../styles.module.css';
 

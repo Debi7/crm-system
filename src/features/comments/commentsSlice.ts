@@ -34,7 +34,9 @@ export const fetchComments = createAsyncThunk<
     console.log('API response:', response.data);
     return response.data;
   } catch (error) {
-    return thunkAPI.rejectWithValue('Failed to fetch comments');
+    return thunkAPI.rejectWithValue(
+      error instanceof Error ? error.message : 'Failed to fetch comments'
+    );
   }
 });
 
