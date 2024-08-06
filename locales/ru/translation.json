@@ -28,7 +28,16 @@
     "status": "Статус: {{status}}",
     "assigned_to": "Назначено на: {{assignedTo}}",
     "created_at": "Создано: {{createdAt}}",
-    "updated_at": "Обновлено: {{updatedAt}}"
+    "updated_at": "Обновлено: {{updatedAt}}",
+    "project": "Проект: {{project}}",
+    "summary": "Резюме: {{summary}}",
+    "received_from_client": "Прибыль от клиента: {{profit}}",
+    "send_to_project_manager": "Расходы на управление проектом: {{managerExpenses}}",
+    "send_to_account_manager": "Расходы на аккаунт-менеджера: {{accountExpenses}}",
+    "send_to_designer": "Расходы на дизайнера: {{designerExpenses}}",
+    "date_started_by_designer": "Дата начала дизайнером: {{startDate}}",
+    "date_finished_by_designer": "Дата завершения дизайнером: {{finishDate}}",
+    "date_finished": "Дата завершения: {{finishedDate}}"
   },
   "lastComments": {
     "title": "Последние 10 комментариев"
@@ -42,5 +51,11 @@
     "email": "эл.почта",
     "completed_tasks": "выполненные задачи",
     "tasks_in_progress": "задачи в стадии выполнения"
+  },
+  "comment": {
+    "userName": "Имя пользователя",
+    "relativeTime": "Относительное время",
+    "task": "Задача",
+    "message": "Сообщение"
   }
 }

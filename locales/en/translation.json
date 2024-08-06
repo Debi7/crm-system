@@ -28,7 +28,19 @@
     "status": "Status: {{status}}",
     "assigned_to": "Assigned to: {{assignedTo}}",
     "created_at": "Created at: {{createdAt}}",
-    "updated_at": "Updated at: {{updatedAt}}"
+    "updated_at": "Updated at: {{updatedAt}}",
+    "designer": "Designer: {{designer}}",
+    "project": "Project: {{project}}",
+    "summary": "Summary: {{summary}}",
+    "received_from_client": "Received from client: {{receivedFromClient}}",
+    "send_to_project_manager": "Sent to project manager: {{sendToProjectManager}}",
+    "send_to_account_manager": "Sent to account manager: {{sendToAccountManager}}",
+    "send_to_designer": "Sent to designer: {{sendToDesigner}}",
+    "date_created": "Date created: {{dateCreated}}",
+    "date_updated": "Date updated: {{dateUpdated}}",
+    "date_started_by_designer": "Date started by designer: {{dateStartedByDesigner}}",
+    "date_finished_by_designer": "Date finished by designer: {{dateFinishedByDesigner}}",
+    "date_finished": "Date finished: {{dateFinished}}"
   },
   "lastComments": {
     "title": "Last 10 comments"
@@ -42,5 +54,11 @@
     "email": "email",
     "completed_tasks": "completed tasks",
     "tasks_in_progress": "tasks in progress"
+  },
+  "comment": {
+    "userName": "User Name",
+    "relativeTime": "Relative Time",
+    "task": "Task",
+    "message": "Message"
   }
 }
