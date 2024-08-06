@@ -13,13 +13,13 @@ const IssuesPage: React.FC = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch<AppDispatch>();
 
-  const { issues, status, error } = useSelector<RootState, IssuesState>(
+  const { issues, status, error, key } = useSelector<RootState, IssuesState>(
     (state) => state.issues
   );
 
   useEffect(() => {
     if (status === 'idle') {
-      dispatch(fetchIssues({ key: 'your_project_key' }));
+      dispatch(fetchIssues({ key }));
     }
   }, [dispatch, status]);
 
@@ -27,7 +27,8 @@ const IssuesPage: React.FC = () => {
     console.log("Issues:", issues);
     console.log("Status:", status);
     console.log("Error:", error);
-  }, [issues, status, error]);
+    console.log("Key:", key);
+  }, [issues, status, error, key]);
 
   return (
     <div className={styles.issuesPage__wrapper}>
@@ -38,7 +39,7 @@ const IssuesPage: React.FC = () => {
           <UnorderedList styleType="none" spacing={3}>
             {issues.length > 0 ? (
               issues.map((issue) => (
-                <ListItem key={issue.id} mb="4">
+                <ListItem key={issue.key} mb="4">
                   <Heading as="h3" size="md">{issue.summary}</Heading>
                   <Text>{t('issues.project', { project: issue.project })}</Text>
                   <Text>{t('issues.received_from_client', { profit: issue.received_from_client })}</Text>

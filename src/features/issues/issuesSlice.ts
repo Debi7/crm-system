@@ -25,12 +25,14 @@ export interface IssuesState {
   issues: Issue[];
   status: 'idle' | 'loading' | 'succeeded' | 'failed';
   error: string | null;
+  key: string;
 }
 
 const initialState: IssuesState = {
   issues: [],
   status: 'idle',
   error: null,
+  key: '',
 };
 
 export const fetchIssues = createAsyncThunk<

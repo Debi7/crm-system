@@ -5,6 +5,10 @@ import { fetchDesigners, Designer, Task } from '../features/designers/designersS
 import { RootState, AppDispatch } from '../store';
 import styles from '../styles.module.css';
 
+interface DesignerWithMedianTime extends Designer {
+  medianTime?: number;
+  date_finished?: string | null;
+}
 
 const calculateMedian = (times: number[]): number => {
   if (times.length === 0) return 0;
@@ -22,7 +26,7 @@ const TopDesigners: React.FC = () => {
   const { t } = useTranslation();
 
   const dispatch = useDispatch<AppDispatch>();
-  const designers = useSelector((state: RootState) => state.designers.designers); // Используем тип Designer здесь
+  const designers = useSelector((state: RootState) => state.designers.designers);
   const status = useSelector((state: RootState) => state.designers.status);
 
   useEffect(() => {
@@ -31,10 +35,24 @@ const TopDesigners: React.FC = () => {
     }
   }, [dispatch, status]);
 
-  const sortedDesigners = designers
-    .map((designer) => {
-      const medianTime = calculateMedianTime(designer.tasks || []);
-      return { ...designer, medianTime };
+  const sortedDesignersWithMedian: DesignerWithMedianTime[] = designers
+    .map((designer: Designer) => {
+      const tasks: Task[] = designer.issues.map(issue => {
+        const startDate = issue.date_started_by_designer ? new Date(issue.date_started_by_designer).getTime() : null;
+        const finishDate = issue.date_finished ? new Date(issue.date_finished).getTime() : null;
+        const timeSpent = startDate && finishDate ? (finishDate - startDate) / 3600000 : 0;
+        return { timeSpent };
+      });
+
+      const medianTime = calculateMedianTime(tasks);
+      const latestIssue = designer.issues.length > 0 ? designer.issues[designer.issues.length - 1] : null;
+      const dateFinished = latestIssue ? latestIssue.date_finished : null;
+
+      return {
+        ...designer,
+        medianTime,
+        date_finished: dateFinished
+      };
     })
     .sort((a, b) => (a.medianTime || 0) - (b.medianTime || 0))
     .slice(0, 10);
@@ -44,19 +62,22 @@ const TopDesigners: React.FC = () => {
       <h2 className={styles.topDesigners__heading}>{t('topDesigners.title')}</h2>
       <div className={styles.topDesigners__wrapper}>
         {status === 'loading' && <p>Loading designers...</p>}
-        {/* {status === 'succeeded' && ( */}
-        <ul>
-          {sortedDesigners.map((designer: Designer) => (
-            <li key={designer.id}>
-              <img src={designer.avatar} alt={`${designer.name}'s avatar`} />
-              <div>Name: {designer.name}</div>
-              <div>Email: {designer.email}</div>
-              <div>Tasks Completed: {designer.tasksCompleted}</div>
-              <div>Median Time Spent: {designer.medianTime} hours</div>
-            </li>
-          ))}
-        </ul>
-        {/* )} */}
+        {status === 'succeeded' && (
+          <ul>
+            {sortedDesignersWithMedian.map((designer: DesignerWithMedianTime) => {
+              console.log('Designer Username:', designer.username);
+              return (
+                <li key={designer.username}>
+                  <img src={designer.avatar} alt={`${designer.username}'s avatar`} />
+                  <div>Name: {designer.username}</div>
+                  <div>Email: {designer.email}</div>
+                  <div>Latest Issue Finished Date: {designer.date_finished || 'N/A'}</div>
+                  <div>Median Time Spent: {designer.medianTime ? `${designer.medianTime} hours` : 'N/A'}</div>
+                </li>
+              );
+            })}
+          </ul>
+        )}
       </div>
     </>
   );

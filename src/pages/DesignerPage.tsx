@@ -12,9 +12,10 @@ const DesignerPage: React.FC = () => {
     (state) => state.designers
   );
 
+
   useEffect(() => {
     if (status === 'idle') {
-      dispatch(fetchDesigners({ key: 'your_project_key' }));
+      dispatch(fetchDesigners({}));
     }
   }, [dispatch, status]);
 
@@ -29,26 +30,41 @@ const DesignerPage: React.FC = () => {
       {status === 'loading' && <Text>Loading...</Text>}
       {status === 'failed' && <Text>Error: {error}</Text>}
       {status === 'succeeded' && designers.length > 0 ? (
-        <UnorderedList>
+
+        <UnorderedList styleType="none" spacing={2} className={styles.designers__item}>
           {designers.map((designer) => (
-            <ListItem key={designer.username}>
-              <Heading as="h3">{designer.username}</Heading>
-              <Text>Email: {designer.email}</Text>
-              <Text>Avatar: <img src={designer.avatar} alt={designer.username} /></Text>
-              <UnorderedList>
-                {designer.issues.map(issue => (
-                  <ListItem key={issue.id}>
-                    <Text>Issue Key: {issue.key}, Status: {issue.status}</Text>
-                  </ListItem>
-                ))}
-              </UnorderedList>
-            </ListItem>
+            <div className={styles.item}>
+              <ListItem key={designer.username}>
+                <div className={styles.img__text}>
+                  <div className={styles.img}>
+                    <img src={designer.avatar} alt={designer.username} width={80} height={80} />
+                  </div>
+                  <div className={styles.text}>
+                    <Heading as="h3">{designer.username}</Heading>
+                    <Text>Email: {designer.email}</Text>
+                  </div>
+                </div>
+
+                <div className={styles.designer__issues}>
+                  <UnorderedList styleType="none">
+                    {designer.issues.map(issue => (
+                      <ListItem key={issue.id}>
+                        <Text className={styles.status__issues}>
+                          <a>Issue: {issue.key}, Status: {issue.status}</a>
+                        </Text>
+                      </ListItem>
+                    ))}
+                  </UnorderedList>
+                </div>
+              </ListItem>
+            </div>
           ))}
         </UnorderedList>
       ) : (
         <Text>No designers available.</Text>
-      )}
-    </Box>
+      )
+      }
+    </Box >
   );
 };
 

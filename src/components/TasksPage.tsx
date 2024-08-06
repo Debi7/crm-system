@@ -32,11 +32,11 @@ const TasksPage: React.FC = () => {
     }));
 
     issues.forEach((issue) => {
-      const weekNumber = calculateWeekNumber(new Date(issue.updatedAt));
+      const weekNumber = calculateWeekNumber(new Date(issue.date_updated));
       if (weekNumber <= weeks) {
         const weekData = weeksData[weekNumber - 1];
         weekData.profit += issue.received_from_client || 0;
-        weekData.expenses += issue.send_to_project_manage || 0;
+        weekData.expenses += issue.send_to_project_manager || 0;
         weekData.balance = weekData.profit - weekData.expenses;
       }
     });

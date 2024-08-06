@@ -3,6 +3,10 @@ import { API_ENDPOINTS } from '../../apiConfig';
 import axios from 'axios';
 import { Issue } from '../issues/issuesSlice';
 
+export interface Task {
+  timeSpent: number;
+}
+
 export interface Designer {
   avatar: string;
   username: string;
@@ -14,6 +18,8 @@ export interface Designer {
     avatarWebp2x: string;
   };
   issues: Issue[];
+  tasks?: Task[];
+  date_finished?: string | null;
 }
 
 export interface DesignersState {
