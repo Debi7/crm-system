@@ -10,6 +10,9 @@ export interface Comment {
   message: string;
   timestamp: string;
   status: 'open' | 'inProgress' | 'closed';
+  issue: string;
+  avatar: string;
+  username: string;
 }
 
 export interface CommentsState {

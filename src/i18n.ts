@@ -18,7 +18,7 @@ i18n
       caches: ['localStorage', 'cookie'], // Куда кэшировать язык
     },
     backend: {
-      loadPath: '/locales/{{lng}}/translation.json', // Путь к файлам переводов
+      loadPath: import.meta.env.BASE_URL + '/locales/{{lng}}/translation.json', // Путь к файлам переводов
     },
   });
 

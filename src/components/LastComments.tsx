@@ -5,16 +5,18 @@ import styles from '../styles.module.css';
 // Этот интерфейс используется в компоненте LastComments для отображения данных комментариев в пользовательском интерфейсе
 interface Comment {
   id: number;
-  designerAvatar?: string;
-  userName?: string;
+  avatar?: string;
+  username?: string;
   relativeTime?: string;
   task?: string;
   message: string;
+  issue: string;
   // Дополнительные поля, если необходимо
 }
 
 interface LastCommentsProps {
   comments: Comment[];
+
 }
 
 const LastComments: React.FC<LastCommentsProps> = ({ comments }) => {
@@ -29,10 +31,10 @@ const LastComments: React.FC<LastCommentsProps> = ({ comments }) => {
         <div className={styles.scrollableContainer}>
           {lastComments.map((comment) => (
             <div key={comment.id} className={styles.comment__wrapper}>
-              <img src={comment.designerAvatar} alt="avatar" />
-              <span>{comment.userName}</span>
+              <img src={comment.avatar} alt="avatar" />
+              <span>{comment.username}</span>
               <span>{comment.relativeTime}</span>
-              <span>{comment.task}</span>
+              <span>{comment.issue}</span>
               <span>{comment.message}</span>
             </div>
           ))}
